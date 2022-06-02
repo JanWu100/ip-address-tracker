@@ -12,9 +12,12 @@
     />
 
     <title>Frontend Mentor | IP Address Tracker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/normalize.css" />
     <link
       rel="stylesheet"
@@ -33,26 +36,25 @@
     <div class="header">
       <h1>IP Address Tracker</h1>
       <form action="">
-        <input type="text" placeholder="earch for any IP address or domain"/>
-        <button type="submit">></button>
+        <input type="text" placeholder="Search for any IP address or domain" />
+        <button type="submit"><img src="./images/icon-arrow.svg" alt=""></button>
       </form>
-
     </div>
     <div class="map">
       <div class="output">
-        <div>
+        <div class="output__item">
           <h2 class="output__label">IP ADRESS</h2>
           <p class="output__data">102.212.174.101</p>
         </div>
-        <div>
+        <div class="output__item">
           <h2 class="output__label">LOCATION</h2>
           <p class="output__data">Brooklym, NY 10001</p>
         </div>
-        <div>
+        <div class="output__item">
           <h2 class="output__label">TIMEZONE</h2>
           <p class="output__data">UT-05:00</p>
         </div>
-        <div>
+        <div class="output__item">
           <h2 class="output__label">ISP</h2>
           <p class="output__data">SpaceX Starlink</p>
         </div>
@@ -64,9 +66,28 @@
     Timezone UTC
     ISP -->
     <script>
+      const setOutputHeight = () => {
+        const root = document.querySelector(":root");
+
+        const outputHeight = document.querySelector(".output").clientHeight;
+
+        root.style.setProperty("--output-height", `${outputHeight / 2}px`);
+      };
+
+      setOutputHeight();
+      window.addEventListener("resize", () => {
+        console.log("a");
+        setOutputHeight();
+      });
+
+
+      const latitude = 52.45519
+      const longitude = 16.94075
+
       var map = L.map("map", {
-        center: [52.455190, 16.940750],
-        zoom: 13,
+        center: [latitude, longitude],
+        zoom: 19,
+        zoomControl: false,
       });
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -74,10 +95,15 @@
         attribution: "© OpenStreetMap",
       }).addTo(map);
 
-      var popup = L.popup()
-        .setLatLng([52.455190, 16.940750])
-        .setContent("<h1>aaa</h1>")
-        .openOn(map);
+      // var popup = L.popup()
+      //   .setLatLng([52.45519, 16.94075])
+      //   .setContent("<h1>aaa</h1>")
+      //   .openOn(map);
+
+      var myIcon = L.icon({
+    iconUrl: './images/icon-location.svg',
+});
+      L.marker([latitude, longitude], {icon: myIcon}).addTo(map);
     </script>
   </body>
 </html>
