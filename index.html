@@ -31,32 +31,35 @@
       integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
       crossorigin=""
     ></script>
+    <script src="L.activearea.js"></script>
   </head>
   <body>
     <div class="header">
       <h1>IP Address Tracker</h1>
       <form action="">
         <input type="text" placeholder="Search for any IP address or domain" />
-        <button type="submit"><img src="./images/icon-arrow.svg" alt=""></button>
+        <button type="submit">
+          <img src="./images/icon-arrow.svg" alt="" />
+        </button>
       </form>
     </div>
     <div class="map">
       <div class="output">
         <div class="output__item">
           <h2 class="output__label">IP ADRESS</h2>
-          <p class="output__data">102.212.174.101</p>
+          <p class="output__data od__ip">102.212.174.101</p>
         </div>
         <div class="output__item">
           <h2 class="output__label">LOCATION</h2>
-          <p class="output__data">Brooklym, NY 10001</p>
+          <p class="output__data od__location">Brooklym, NY 10001</p>
         </div>
         <div class="output__item">
           <h2 class="output__label">TIMEZONE</h2>
-          <p class="output__data">UT-05:00</p>
+          <p class="output__data od__timezone">UT-05:00</p>
         </div>
         <div class="output__item">
           <h2 class="output__label">ISP</h2>
-          <p class="output__data">SpaceX Starlink</p>
+          <p class="output__data od__isp">SpaceX Starlink</p>
         </div>
       </div>
       <div id="map"></div>
@@ -80,15 +83,14 @@
         setOutputHeight();
       });
 
-
-      const latitude = 52.45519
-      const longitude = 16.94075
+      let latitude = 52.45519;
+      let longitude = 16.94075;
 
       var map = L.map("map", {
         center: [latitude, longitude],
-        zoom: 19,
+        zoom: 16,
         zoomControl: false,
-      });
+      }).setActiveArea('activeArea');
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -101,9 +103,42 @@
       //   .openOn(map);
 
       var myIcon = L.icon({
-    iconUrl: './images/icon-location.svg',
-});
-      L.marker([latitude, longitude], {icon: myIcon}).addTo(map);
+        iconUrl: "./images/icon-location.svg",
+        iconSize:     [46, 56], // size of the icon
+    iconAnchor:   [23, 55], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
+      const marker = L.marker([latitude, longitude], { icon: myIcon }).addTo(map);
+
+      
+      const getIp = async () => {
+        const ipAddress = "";
+        const API_URL = `https://geo.ipify.org/api/v2/country,city?apiKey=at_T8VsSFWwJLV0ok9N0OzlhH5Q0tBHm&ipAddress=${ipAddress}`;
+
+        fetch(API_URL)
+          .then((response) => response.json())
+          .then((data) => {
+            document.querySelector(".od__ip").textContent = data.ip;
+            document.querySelector(".od__location").textContent = `${data.location.city}, ${data.location.country} ${data.location.postalCode}`;
+
+            document.querySelector(".od__timezone").textContent = data.location
+              .timezone
+              ? data.location.timezone
+              : "n/a";
+            document.querySelector(".od__isp").textContent = data.isp;
+
+            latitude = data.location.lat
+            longitude = data.location.lng
+            console.log(data);
+          marker.setLatLng([latitude,longitude])
+          map.setView([latitude,longitude], 16, { animation: true });
+
+          });
+      };
+
+      getIp();
+
+
     </script>
   </body>
 </html>
