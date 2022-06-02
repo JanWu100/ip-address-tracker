@@ -28,3 +28,7 @@ p {
     width: 100%;
     height: 70vh;
 }
+
+#map {
+    height: 100%;
+}

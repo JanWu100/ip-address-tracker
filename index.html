@@ -12,42 +12,68 @@
     />
 
     <title>Frontend Mentor | IP Address Tracker</title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
   </head>
   <body>
-      <div class="header">
-        <h1>IP Address Tracker</h1>
-        <form action="">
-          <input type="text" />
-          <button type="submit"></button>
-        </form>
-      </div>
-      <div class="map">
-
-        <div class="output">
-          <div>
-            <h2></h2>
-            <p></p>
-          </div>
-          <div>
-            <h2></h2>
-            <p></p>
-          </div>
-          <div>
-            <h2></h2>
-            <p></p>
-          </div>
-          <div>
-            <h2></h2>
-            <p></p>
-          </div>
+    <div class="header">
+      <h1>IP Address Tracker</h1>
+      <form action="">
+        <input type="text" />
+        <button type="submit"></button>
+      </form>
+    </div>
+    <div class="map">
+      <div class="output">
+        <div>
+          <h2></h2>
+          <p></p>
         </div>
-
+        <div>
+          <h2></h2>
+          <p></p>
+        </div>
+        <div>
+          <h2></h2>
+          <p></p>
+        </div>
+        <div>
+          <h2></h2>
+          <p></p>
+        </div>
       </div>
+      <div id="map"></div>
+    </div>
 
     <!-- IP Address Tracker Search for any IP address or domain IP Address Location
     Timezone UTC
     ISP -->
+    <script>
+      var map = L.map("map", {
+        center: [52.455190, 16.940750],
+        zoom: 13,
+      });
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      var popup = L.popup()
+        .setLatLng([52.455190, 16.940750])
+        .setContent("<h1>aaa</h1>")
+        .openOn(map);
+    </script>
   </body>
 </html>
