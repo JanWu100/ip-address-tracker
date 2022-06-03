@@ -1,10 +1,10 @@
 :root {
-    --color-invalid: rgb(205, 51, 82);
   --br: 15px;
+  --color-invalid: rgb(205, 51, 82);
   --fontsize-p: clamp(1.2rem, 5vw, 1.6rem);
   --gap: 22px;
-  --output-height: 0px;
   --header-height: calc(195px + var(--output-height));
+  --output-height: 0px;
 }
 
 *,
@@ -18,11 +18,11 @@ html {
 }
 
 body {
+  font-family: "Rubik", sans-serif;
+  height: 100vh;
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  font-family: "Rubik", sans-serif;
 }
 
 h1,
@@ -34,134 +34,128 @@ p {
 
 h1 {
   color: white;
-  font-weight: 500;
   font-size: 1.8rem;
-}
-
-.header {
-  background: url("../images/pattern-bg.png");
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  padding-top: 2rem;
-  height: var(--header-height);
-  /* padding-bottom: calc((((var(--fontsize-p) + var(--gap) + .6rem + .8rem) * 4) /2) + 4rem - (var(--gap)/2)); */
-}
-
-form {
-  display: flex;
-  position: relative;
-  width: min(100%, 550px);
-  margin: 0 auto;
-  padding: 2rem 1.5rem 0;
-}
-
-.input {
-  width: 100%;
-  height: 55px;
-  border-top-left-radius: var(--br);
-  border-bottom-left-radius: var(--br);
-  border: none;
-  padding-left: 2rem;
-  outline: none;
-}
-
-.invalid {
-    border: 2px solid var(--color-invalid);
-}
-
-.invalid-message {
-    position: absolute;
-    color: white;
-    font-size: .9rem;
-    font-weight: 400;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--color-invalid);
-    padding: .2rem .5rem;
-    border-radius: 5px;
-}
-
-.map {
-  width: 100%;
-  height: calc(100vh - var(--header-height));
-}
-
-.map {
-  position: relative;
-}
-
-.output {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--br);
-  padding: 2rem;
-  background: white;
-  z-index: 314159;
-  text-align: center;
-  display: grid;
-  row-gap: var(--gap);
-  width: min(100% - 3rem, 550px - 3rem);
+  font-weight: 500;
 }
 
 h2 {
+  color: grey;
   font-size: 0.6rem;
   letter-spacing: 1px;
-  color: grey;
 }
+
 p {
   font-size: var(--fontsize-p);
   font-weight: 500;
   margin-top: 0.5rem;
 }
 
-button {
+.header {
+  background: url("../images/pattern-bg.png") no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: var(--header-height);
+  padding-top: 2rem;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 0;
+  position: relative;
+  width: min(100%, 550px);
+}
+
+.input {
+  border-bottom-left-radius: var(--br);
+  border-top-left-radius: var(--br);
+  border: none;
   height: 55px;
-  width: 55px;
-  border-top-right-radius: var(--br);
+  outline: none;
+  padding-left: 2rem;
+  width: 100%;
+}
+
+.invalid {
+  border: 2px solid var(--color-invalid);
+}
+
+.invalid-message {
+  background: var(--color-invalid);
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 400;
+  left: 50%;
+  padding: 0.2rem 0.5rem;
+  position: absolute;
+  top: 1rem;
+  transform: translateX(-50%);
+}
+
+.btn {
+  align-items: center;
+  background-color: black;
   border-bottom-right-radius: var(--br);
+  border-top-right-radius: var(--br);
   border: none;
   color: white;
+  cursor: pointer;
+  display: flex;
   font-weight: 700;
-  background-color: black;
- cursor: pointer;
- display: flex;
- align-items: center;
- justify-content: center;
+  height: 55px;
+  justify-content: center;
+  width: 55px;
 }
 
-button:hover {
-    background-color: rgb(62, 62, 62);
+.btn:hover {
+  background-color: rgb(62, 62, 62);
 }
 
-
-.activeArea {
+.output {
+  background: white;
+  border-radius: var(--br);
+  display: grid;
+  left: 50%;
+  padding: 2rem;
   position: absolute;
-  top: calc(var(--output-height));
-  left: 0;
-  right: 0;
-  bottom: 0;
-
+  row-gap: var(--gap);
+  text-align: center;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: min(100% - 3rem, 550px - 3rem);
+  z-index: 314159;
 }
 
 #map {
   height: 100%;
 }
 
+.map {
+  height: calc(100vh - var(--header-height));
+  position: relative;
+  width: 100%;
+}
+
+.activeArea {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: calc(var(--output-height));
+}
 
 @media screen and (min-width: 1100px) {
   .output {
     grid-template-columns: repeat(4, 1fr);
-    width: min(100% - 3rem, 1100px);
-    text-align: left;
     padding: 2rem 0;
+    text-align: left;
+    width: min(100% - 3rem, 1100px);
   }
   .output__item {
     border-right: 1px solid grey;
-    padding-left: 2rem;
+    padding: 0 2rem;
   }
   .output__item:last-child {
     border: none;
