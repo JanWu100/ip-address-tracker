@@ -59,7 +59,7 @@ p {
   text-align: center;
 }
 
-form {
+.form {
   display: flex;
   margin: 0 auto;
   padding: 2rem 1.5rem 0;
@@ -185,7 +185,7 @@ footer {
   .output__item:last-child {
     border: none;
   }
-  form {
+  .form {
     padding: 2rem 0 0;
   }
 }
