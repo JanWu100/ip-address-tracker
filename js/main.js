@@ -1,3 +1,5 @@
+"use strict";
+
 let latitude = 40.678177;
 let longitude = -73.94416;
 
@@ -32,14 +34,16 @@ const domain =
 const searchIp = "ipAddress";
 const searchDomain = "domain";
 
-input.addEventListener("keyup", (e) => {
-    input.classList.remove("invalid");
-    invalidMessage.classList.remove("invalid-message");
-    invalidMessage.textContent = "";
-  });
+const clearInvalid = () => {
+  input.classList.remove("invalid");
+  invalidMessage.classList.remove("invalid-message");
+  invalidMessage.textContent = "";
+};
 
+input.addEventListener("input", clearInvalid);
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (e) => {
+  e.preventDefault();
   if (input.value.match(regexIpv4) || input.value.match(regexIpv6)) {
     trackIp(searchIp, input.value);
   } else if (input.value.match(domain)) {
@@ -71,11 +75,13 @@ const trackIp = async (type, addressToFind) => {
         ${data.location.country ? data.location.country : " "} 
         ${data.location.postalCode ? data.location.postalCode : " "}`;
 
-      timezone.textContent = data.location.timezone ? data.location.timezone : "n/a";
+      timezone.textContent = data.location.timezone
+        ? data.location.timezone
+        : "n/a";
       isp.textContent = data.isp;
       latitude = data.location.lat;
       longitude = data.location.lng;
-      moveMap(latitude,longitude)
+      moveMap(latitude, longitude);
     });
 };
 
@@ -83,4 +89,3 @@ const moveMap = (lat, lng) => {
   marker.setLatLng([lat, lng]);
   map.setView([lat, lng], 16, { animation: true });
 };
-

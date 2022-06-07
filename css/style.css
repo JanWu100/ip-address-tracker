@@ -147,29 +147,29 @@ p {
 }
 
 footer {
-    position: fixed;
-    height: 50px;
-    background-color: rgba(49, 49, 49);
-    width: 100%;
-    bottom: 0%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 314159;
-  }
-  
-  .attribution {
-    font-size: 11px;
-    text-align: center;
-  
-    color: white;
-  }
-  .attribution a {
-    color: #9bb3f5;
-  }
-  .attribution a:hover {
-    color: #5d82ec;
-  }
+  position: fixed;
+  height: 50px;
+  background-color: rgba(49, 49, 49);
+  width: 100%;
+  bottom: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 314159;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+
+  color: white;
+}
+.attribution a {
+  color: #9bb3f5;
+}
+.attribution a:hover {
+  color: #5d82ec;
+}
 
 @media screen and (min-width: 1100px) {
   .output {
@@ -179,7 +179,7 @@ footer {
     width: min(100% - 3rem, 1100px);
   }
   .output__item {
-    border-right: 1px solid grey;
+    border-right: 1px solid rgba(128, 128, 128, 0.458);
     padding: 0 2rem;
   }
   .output__item:last-child {
